@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming Content</title>
+    <link rel="stylesheet" href="content.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Video Player Modal (hidden by default) -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <video id="videoPlayer" controls>
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-info">
+                <h2 id="videoTitle"></h2>
+                <p id="videoDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">Playflix</div>
+        <nav class="main-nav">
+            <a href="#">Home</a>
+            <a href="#">TV Shows</a>
+            <a href="#">Movies</a>
+            <a href="#">My List</a>
+        </nav>
+    </header>
+
+    <main class="content-container">
+        <!-- Featured/Banner Content -->
+        <section class="featured-content">
+            <div class="featured-info">
+                <h1 class="featured-title">Featured Show</h1>
+                <p class="featured-description">This is a description of the featured content that would appear in the banner area.</p>
+                <div class="featured-buttons">
+                    <button class="play-button" id="featuredPlayButton">▶ Play</button>
+                    <button class="info-button">ℹ More Info</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Rows -->
+        <section class="content-row">
+            <h2 class="row-title">Popular on Playflix</h2>
+            <div class="row-content" id="popular-row"></div>
+        </section>
+
+        <section class="content-row">
+            <h2 class="row-title">Trending Now</h2>
+            <div class="row-content" id="trending-row"></div>
+        </section>
+
+        <section class="content-row">
+            <h2 class="row-title">Continue Watching</h2>
+            <div class="row-content" id="continue-row"></div>
+        </section>
+    </main>
+
+    <script src="content.js"></script>
+</body>
+</html>
