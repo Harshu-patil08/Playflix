@@ -1,0 +1,33 @@
+# Node.js dependencies
+**/node_modules/  # Ignore node_modules in all subdirectories
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build files
+dist/
+build/
+.next/
+out/
+
+# OS/Editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db
+
+# Optional: Ignore package-lock.json (but recommended to keep it)
+# package-lock.json

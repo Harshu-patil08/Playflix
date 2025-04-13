@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Your Plan - Playflix</title>
+    <link rel="stylesheet" href="subscription.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="subscription-container">
+      <nav class="subs-nav">
+        <a href="index.html"
+          ><img
+            src="images/logo_2.png"
+            class="logo"
+            width="120"
+            height="auto"
+        /></a>
+        <a href="login.html" class="signin-link">Sign In</a>
+      </nav>
+
+      <div class="progress-steps">
+        <div class="step completed">
+          <span class="step-number">1</span>
+          <span class="step-text">Plan</span>
+        </div>
+        <div class="step">
+          <span class="step-number">2</span>
+          <span class="step-text">Payment</span>
+        </div>
+        <div class="step">
+          <span class="step-number">3</span>
+          <span class="step-text">Complete</span>
+        </div>
+      </div>
+
+      <div class="subscription-content">
+        <h1>Choose your plan</h1>
+        <div class="plan-cards">
+          <div class="plan-card recommended">
+            <div class="plan-header">
+              <h3>Premium</h3>
+              <div class="recommended-badge">Recommended</div>
+            </div>
+            <div class="plan-price">
+              <span class="price">₹299</span>
+              <span class="period">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check"></i> 4K Ultra HD + HDR</li>
+              <li>
+                <i class="fas fa-check"></i> Watch on 4 screens at the same time
+              </li>
+              <li><i class="fas fa-check"></i> Download on 6 devices</li>
+              <li><i class="fas fa-check"></i> Unlimited movies & TV shows</li>
+              <li><i class="fas fa-check"></i> Cancel anytime</li>
+            </ul>
+            <button class="select-plan-btn">Select Plan</button>
+          </div>
+
+          <div class="plan-card">
+            <div class="plan-header">
+              <h3>Standard</h3>
+            </div>
+            <div class="plan-price">
+              <span class="price">₹149</span>
+              <span class="period">/month</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check"></i> Full HD</li>
+              <li>
+                <i class="fas fa-check"></i> Watch on 2 screens at the same time
+              </li>
+              <li><i class="fas fa-check"></i> Download on 4 devices</li>
+              <li><i class="fas fa-check"></i> Unlimited movies & TV shows</li>
+              <li><i class="fas fa-check"></i> Cancel anytime</li>
+            </ul>
+            <button class="select-plan-btn">Select Plan</button>
+          </div>
+
+          <div class="plan-card">
+            <div class="plan-header">
+              <h3>Basic</h3>
+            </div>
+            <div class="plan-price">
+              <span class="price">Free</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check"></i> HD</li>
+              <li>
+                <i class="fas fa-check"></i> Watch on 1 screen at the same time
+              </li>
+              <li><i class="fas fa-check"></i> Download on 2 devices</li>
+              <li><i class="fas fa-check"></i> Unlimited movies & TV shows</li>
+              <li><i class="fas fa-check"></i> Cancel anytime</li>
+            </ul>
+            <!-- <button class="select-plan-btn">Watch</button>  -->
+            <button type="button" class="watch-plan-btn" onclick="window.location.href='login.html'">Watch</button>
+          </div>
+
+          
+        </div>
+
+        <div class="plan-comparison">
+          <h3>Plan Comparison</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Features</th>
+                <th>Basic</th>
+                <th>Standard</th>
+                <th>Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Monthly price</td>
+                <td>Free</td>
+                <td>₹149</td>
+                <td>₹299</td>
+              </tr>
+              <tr>
+                <td>Video quality</td>
+                <td>HD</td>
+                <td>Full HD</td>
+                <td>4K Ultra HD + HDR</td>
+              </tr>
+              <tr>
+                <td>Watch on your TV</td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>Watch on your computer</td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>Watch on your phone or tablet</td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+                <td><i class="fas fa-check"></i></td>
+              </tr>
+              <tr>
+                <td>Screens you can watch on at the same time</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>Download devices</td>
+                <td>2</td>
+                <td>4</td>
+                <td>6</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="faq-section">
+          <h3>Frequently Asked Questions</h3>
+          <div class="faq-item">
+            <button class="faq-question">
+              What is Playflix? <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Playflix is a streaming service that offers a wide variety of
+                award-winning TV shows, movies, anime, documentaries, and more
+                on thousands of internet-connected devices.
+              </p>
+              <p>
+                You can watch as much as you want, whenever you want without a
+                single commercial – all for one low monthly price. There's
+                always something new to discover and new TV shows and movies are
+                added every week!
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              How much does Playflix cost? <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Watch Playflix on your smartphone, tablet, Smart TV, laptop, or
+                streaming device, all for one fixed monthly fee. Plans range
+                from ₹4.99 to ₹299 a month. No extra costs, no contracts.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              How do I cancel? <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Playflix is flexible. There are no pesky contracts and no
+                commitments. You can easily cancel your account online in two
+                clicks. There are no cancellation fees – start or stop your
+                account anytime.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              What can I watch on Playflix? <i class="fas fa-plus"></i>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Playflix has an extensive library of feature films,
+                documentaries, TV shows, anime, award-winning Playflix
+                originals, and more. Watch as much as you want, anytime you
+                want.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="subs-footer">
+        <p>Questions? Call 1-866-579-7172</p>
+        <div class="footer-links">
+          <a href="#">FAQ</a>
+          <a href="#">Help Center</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Privacy</a>
+          <a href="#">Cookie Preferences</a>
+          <a href="#">Corporate Information</a>
+        </div>
+        <div class="language-selector">
+          <select>
+            <option>English</option>
+            <option>हिन्दी</option>
+            <option>Español</option>
+          </select>
+        </div>
+      </footer>
+    </div>
+
+    <script src="subscription.js"></script>
+  </body>
+</html>

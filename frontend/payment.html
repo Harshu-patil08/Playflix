@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Playflix</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Background image with overlay */
+        .auth-container {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('header-image.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        
+        /* Enhanced form styling */
+        .auth-form {
+            background-color: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            padding: 60px 68px;
+            min-width: 450px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Selected plan styling */
+        .selected-plan {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-left: 4px solid #8000FF;
+        }
+        
+        .selected-plan h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .selected-plan p {
+            font-size: 18px;
+            color: #b3b3b3;
+            margin: 0;
+        }
+        
+        /* Form row for card details */
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        /* Card input styling */
+        .form-group.card-number {
+            position: relative;
+        }
+        
+        .form-group.card-number::after {
+            content: "\f09d \f09b \f09c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8c8c8c;
+            font-size: 18px;
+        }
+        
+        /* Enhanced button styling */
+        .auth-btn {
+            background: linear-gradient(to right, #8000FF, #8000FF);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px #8000ff3f;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .auth-btn:hover {
+            background: linear-gradient(to right, #8000FF, #8000FF);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px #8000ff52;
+        }
+        
+        .cancel-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cancel-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Security notice */
+        .security-notice {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            color: #46d369;
+            font-size: 14px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .auth-form {
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 40px 20px;
+                min-width: 100%;
+                border: none;
+                box-shadow: none;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .selected-plan {
+                padding: 15px;
+            }
+            
+            .selected-plan h3 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <nav class="auth-nav">
+            <a href="index.html"><img src="images/logo_2.png" class="logo" width="150" height="auto"></a>
+        </nav>
+        
+        <div class="auth-form-container">
+            <div class="auth-form">
+                <h1>Complete Your Subscription</h1>
+                
+                <form id="payment-form">
+                    <div class="form-group">
+                        <input type="text" id="card-name" required>
+                        <label for="card-name">Name on Card</label>
+                    </div>
+                    
+                    <div class="form-group card-number">
+                        <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                        <label for="card-number">Card Number</label>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="card-expiry" placeholder="MM/YY" required>
+                            <label for="card-expiry">Expiration Date</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="card-cvv" placeholder="CVV" required>
+                            <label for="card-cvv">Security Code</label>
+                        </div>
+                    </div>
+                    
+                    <div class="security-notice">
+                        <i class="fas fa-lock"></i>
+                        <span>Your payment is securely encrypted</span>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Start Membership</button>
+                    <button type="button" class="cancel-btn" onclick="window.location.href='subscription.html'">Cancel</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p class="recaptcha-notice">
+                        We use 256-bit encryption to protect your payment information. 
+                        <a href="#" class="learn-more">Learn more about security</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Display the selected plan
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = JSON.parse(localStorage.getItem('playflixUser'));
+            if (user && user.plan) {
+                document.getElementById('selected-plan-name').textContent = user.plan.name;
+                document.getElementById('selected-plan-price').textContent = user.plan.price + '/month';
+            }
+            
+            // Handle payment form submission
+            document.getElementById('payment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                const submitBtn = this.querySelector('.auth-btn');
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+                
+                // Simulate payment processing
+                setTimeout(function() {
+                    alert('Payment processed successfully!');
+                    window.location.href = 'index.html';
+                }, 1500);
+            });
+            
+            // Format card number input
+            document.getElementById('card-number').addEventListener('input', function(e) {
+                this.value = this.value.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim();
+            });
+            
+            // Format expiry date input
+            document.getElementById('card-expiry').addEventListener('input', function(e) {
+                this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2');
+            });
+        });
+    </script>
+</body>
+</html>

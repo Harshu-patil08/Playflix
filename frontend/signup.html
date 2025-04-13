@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up - Playflix</title>
+        <link rel="stylesheet" href="auth.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <style>
+            /* Background image with overlay */
+            .auth-container {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('header-image.png');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                min-height: 100vh;
+            }
+            
+            /* Enhanced form styling */
+            .auth-form {
+                background-color: rgba(0, 0, 0, 0.85);
+                border-radius: 10px;
+                padding: 60px 68px;
+                min-width: 450px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Form subtitle styling */
+            .form-subtitle {
+                color: #b3b3b3;
+                margin-bottom: 30px;
+                font-size: 18px;
+                font-weight: 300;
+            }
+            
+            /* Improved input focus effects */
+            .form-group input:focus {
+                background: #454545;
+                box-shadow: 0 0 0 2px #8000FF;
+            }
+            
+            /* Enhanced select dropdown */
+            .language-select {
+                appearance: none;
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+                background-repeat: no-repeat;
+                background-position: right 15px center;
+                background-size: 16px;
+            }
+            
+            /* Enhanced button styling */
+            .auth-btn {
+                background: linear-gradient(to right, #8000FF, #8000FF);
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 8px #8000ff39;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-weight: 600;
+            }
+            
+            .auth-btn:hover {
+                background: linear-gradient(to right, #8000FF, #8000FF);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px #8000ff4e;
+            }
+            
+            /* Password hint styling */
+            .password-hint {
+                margin-top: 10px;
+                color: #8c8c8c;
+                font-size: 13px;
+            }
+            
+            .password-hint ul {
+                margin: 5px 0 0 20px;
+                padding: 0;
+            }
+            
+            .password-hint li {
+                position: relative;
+                margin-bottom: 5px;
+            }
+            /* Mobile Responsive Styles for Signup Page */
+@media only screen and (max-width: 768px) {
+    /* Background adjustment */
+    .auth-container {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+        background-attachment: fixed;
+        background-position: top center;
+    }
+    
+    /* Navigation */
+    .auth-nav {
+        padding: 15px 5%;
+    }
+    
+    .auth-nav .logo {
+        width: 120px;
+    }
+    
+    .signin-link {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    /* Form Container */
+    .auth-form-container {
+        padding: 20px 0;
+        align-items: flex-start;
+    }
+    
+    /* Form Styling */
+    .auth-form {
+        width: 100%;
+        min-width: unset;
+        padding: 40px 6% !important;
+        margin-top: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+    }
+    
+    .auth-form h1 {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+    
+    .form-subtitle {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+    
+    /* Form Elements */
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group input,
+    .language-select {
+        height: 48px;
+        padding: 16px 18px 0;
+        font-size: 15px;
+        width: 235px;
+    }
+    
+    .form-group label {
+        font-size: 15px;
+        top: 14px;
+        left: 18px;
+    }
+    
+    .form-group input:focus + label,
+    .form-group input:valid + label {
+        font-size: 10px;
+        top: 6px;
+    }
+    
+    /* Password Hint */
+    .password-hint {
+        font-size: 12px;
+    }
+    
+    .password-hint ul {
+        margin-left: 15px;
+    }
+    
+    /* Buttons */
+    .auth-btn {
+        padding: 14px;
+        font-size: 15px;
+        margin: 25px 0 15px;
+    }
+    
+    /* Footer */
+    .auth-footer {
+        margin-top: 20px;
+    }
+    
+    .auth-footer p,
+    .recaptcha-notice,
+    .terms-notice {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+    
+    .learn-more {
+        font-size: 12px;
+    }
+}
+
+/* Extra Small Devices (phones, 480px and down) */
+@media only screen and (max-width: 480px) {
+    /* Navigation */
+    .auth-nav .logo {
+        width: 100px;
+    }
+    
+    /* Form Elements */
+    .auth-form h1 {
+        font-size: 24px;
+    }
+    
+    .form-subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .form-group input,
+    .language-select {
+        height: 44px;
+        padding: 14px 16px 0;
+    }
+    
+    .form-group label {
+        font-size: 14px;
+        top: 12px;
+        left: 16px;
+    }
+    
+    /* Password Hint */
+    .password-hint {
+        font-size: 11px;
+    }
+    
+    /* Footer */
+    .auth-footer p {
+        font-size: 11px;
+    }
+}
+
+/* Small Height Devices (landscape phones) */
+@media only screen and (max-height: 600px) {
+    .auth-form-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .auth-form {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    .auth-form h1 {
+        margin-bottom: 12px;
+        font-size: 22px;
+    }
+    
+    .form-subtitle {
+        margin-bottom: 15px;
+        font-size: 13px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .auth-btn {
+        margin: 15px 0 10px;
+    }
+    
+    .password-hint {
+        margin-top: 5px;
+    }
+}
+
+/* Very Small Screens (under 350px width) */
+@media only screen and (max-width: 350px) {
+    .auth-form {
+        padding: 30px 4% !important;
+    }
+    
+    .auth-form h1 {
+        font-size: 22px;
+    }
+    
+    .form-group input {
+        font-size: 14px;
+    }
+    
+    .auth-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .password-hint ul {
+        margin-left: 10px;
+    }
+}
+
+/* Input focus effects for mobile */
+@media (pointer: coarse) {
+    .form-group input:focus {
+        box-shadow: 0 0 0 3px #8000FF;
+    }
+}
+
+/* Language dropdown arrow positioning */
+@media only screen and (max-width: 768px) {
+    .language-select {
+        background-position: right 12px center;
+        background-size: 14px;
+    }
+}
+
+/* Hide phone field on very small screens */
+@media only screen and (max-width: 320px) {
+    #signup-phone {
+        display: none;
+    }
+    
+    label[for="signup-phone"] {
+        display: none;
+    }
+}
+            /* Responsive adjustments */
+        </style>
+    </head>
+    <body>
+        <div class="auth-container">
+            <nav class="auth-nav">
+                <a href="index.html"><img src="images/logo_2.png" class="logo" width="150" height="auto"></a>
+                <a href="login.html" class="signin-link">Sign In</a>
+            </nav>
+            
+            <div class="auth-form-container">
+                <form class="auth-form" id="signup-form" onsubmit="handleSignup(event)">
+                    <h1>Create Account</h1>
+                    <p class="form-subtitle">Enjoy all your favorite shows and movies in one place.</p>
+                    
+                    <div class="form-group">
+                        <input type="text" id="signup-name" required>
+                        <label for="signup-name">Name</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" id="signup-email" required>
+                        <label for="signup-email">Email</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="tel" id="signup-phone">
+                        <label for="signup-phone">Phone number (optional)</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" id="signup-password" required>
+                        <label for="signup-password">Password</label>
+                        <div class="password-hint">
+                            <p>Your password must contain:</p>
+                            <ul>
+                                <li class="length-requirement">Between 6 and 60 characters</li>
+                                <li class="complexity-requirement">Letters and numbers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select id="signup-language" class="language-select">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="ja">Japanese</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Continue to Choose Plan</button>
+                    
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="login.html">Sign in</a>.</p>
+                        <p class="recaptcha-notice">
+                            This page is protected by Google reCAPTCHA to ensure you're not a bot. 
+                            <a href="#" class="learn-more">Learn more.</a>
+                        </p>
+                        <p class="terms-notice">
+                            By continuing, you agree to our <a href="#">Terms of Use</a> and acknowledge that you have read our <a href="#">Privacy Policy</a>.
+                        </p>
+                    </div>
+                    <input type="hidden" id="signup-plan" name="plan" value="basic">
+                </form>
+            </div>
+        </div>
+
+        <script src="auth.js"></script>
+    </body>
+</html>

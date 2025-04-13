@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Playflix 2.0</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="auth.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="header">
+            <nav>
+                <a href="index.html"><img src="images/logo_2.png" class="logo" width="200" height="auto"></a>
+                <div>
+                    <div class="language-dropdown">
+                        <button class="language-btn">English <img src="images/down-icon.png"></button>
+                        <div class="language-dropdown-content">
+                            <div data-lang="all">All Languages</div>
+                            <div data-lang="en">English</div>
+                            <div data-lang="hi">Hindi</div>
+                            <div data-lang="ma">Marathi</div>
+                            <div data-lang="ta">Telugu</div>
+                            <div data-lang="ja">Japanese</div>
+                            <div data-lang="ka">Kannada</div>
+                        </div>
+                    </div>
+                    <button class="signin-btn" onclick="window.location.href='login.html'">Sign In</button>
+                </div>
+            </nav>
+            <div class="header-content">
+                <p style="font-size: 50px;">Unlimited Entertainment Awaits<p>
+                <h3>Watch anytime, anywhere.</h3>
+                <p>Ready to dive in? Just enter your email to start your Free trial.</p>
+                <form class="email-signup">
+                    <input type="email" placeholder="Email address" required>
+                    <button type="submit">Get started <i class="fas fa-chevron-right"></i></button>
+                </form>
+            </div>
+            <div class="join-reasons-container">
+                <div class="join-reason-box">
+                    <p>Face detection for content suggestion</p>
+                    <span>🎭</span>
+                </div>
+                <div class="join-reason-box">
+                    <p>Transliteration Feature</p>
+                    <span>🤝</span>
+                </div>
+                <div class="join-reason-box">
+                    <p>Rent-Free Movies</p>
+                    <span>❤️</span>
+                </div>
+                <div class="join-reason-box">
+                    <p>Affordable Subscription</p>
+                    <span>💻</span>
+                </div>
+                <div class="join-reason-box">
+                    <p>Global Mix of Content</p>
+                    <span>✨</span>
+                </div>
+            </div>
+        </div>
+<!-- Add these content sections to your HTML -->
+<div class="content-container">
+    <div class="content-section">
+        <h2 class="section-title">Popular Videos</h2>
+        <div class="content-row" id="popular-content">
+            <!-- Popular content will be loaded here dynamically -->
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2 class="section-title">Trending Now</h2>
+        <div class="content-row" id="trending-content">
+            <!-- Trending content will be loaded here dynamically -->
+        </div>
+    </div>
+</div>
+
+<!-- Content Details Modal -->
+<div class="modal" id="content-modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div class="modal-body" id="modal-body">
+            <!-- Content details will be loaded here -->
+        </div>
+    </div>
+</div>
+
+        <script src="script.js"></script>
+    </body>
+</html>

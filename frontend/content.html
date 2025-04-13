@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Streaming Content</title>
+    <link rel="stylesheet" href="content.css" />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Inline styles specific to background video */
+      .featured-content {
+        position: relative;
+        overflow: hidden;
+        height: 70vh;
+        display: flex;
+        align-items: center;
+        color: white;
+      }
+
+      .featured-content video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .featured-info {
+        position: absolute;
+        bottom: 10%;
+        left: 3%;
+        z-index: 2;
+        color: white;
+        max-width: 40%;
+        padding: 1.5rem;
+        border-radius: 10px;
+      }
+
+      .featured-buttons {
+        margin-top: 1rem;
+      }
+
+      .featured-buttons button {
+        margin-right: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .play-button {
+        background-color: #fff;
+        color: #000;
+      }
+
+      .info-button {
+        background-color: rgba(109, 109, 110, 0.7);
+        color: #fff;
+      }
+
+      /* Added style for smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Added style for active nav link */
+      .main-nav a.active {
+        font-weight: bold;
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      /* Header styles */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.7) 0%,
+          rgba(0, 0, 0, 0) 100%
+        );
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #8000ff;
+      }
+
+      .main-nav {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      .main-nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: color 0.3s;
+      }
+
+      .main-nav a:hover {
+        color: #8000ff;
+      }
+
+      /* User profile styles */
+      .user-profile {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #8000ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      .profile-dropdown {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        border: 1px solid #333;
+        border-radius: 5px;
+        width: 200px;
+        padding: 1rem;
+        display: none;
+        z-index: 101;
+      }
+
+      .profile-dropdown.show {
+        display: block;
+      }
+
+      .profile-dropdown .user-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .profile-dropdown .user-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #8000ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .profile-dropdown .user-name {
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+      }
+
+      .profile-dropdown .user-email {
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+
+      .profile-dropdown .dropdown-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-top: 1px solid #333;
+        padding-top: 0.5rem;
+      }
+
+      .profile-dropdown .dropdown-menu li {
+        padding: 0.5rem 0;
+      }
+
+      .profile-dropdown .dropdown-menu li a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: block;
+        transition: color 0.3s;
+      }
+
+      .profile-dropdown .dropdown-menu li a:hover {
+        color: #8000ff;
+      }
+
+      /* Adjust main content to account for fixed header */
+      .content-container {
+        margin-top: 80px;
+      }
+
+      /* Genre dropdown styles */
+      .genre-filter {
+        position: relative;
+        margin-right: 20px;
+      }
+
+      .genre-button {
+        background-color: transparent;
+        color: white;
+        border: 1px solid white;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .genre-dropdown {
+        position: absolute;
+        top: 40px;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        border: 1px solid #333;
+        border-radius: 5px;
+        width: 200px;
+        padding: 1rem;
+        display: none;
+        z-index: 101;
+      }
+
+      .genre-dropdown.show {
+        display: block;
+      }
+
+      .genre-dropdown ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .genre-dropdown li {
+        padding: 0.5rem 0;
+      }
+
+      .genre-dropdown li a {
+        color: white;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: block;
+        transition: color 0.3s;
+      }
+
+      .genre-dropdown li a:hover {
+        color: #8000ff;
+      }
+
+      .genre-dropdown li a.active {
+        color: #8000ff;
+        font-weight: bold;
+      }
+
+      /* Content card styles */
+      .content-card {
+        position: relative;
+        transition: transform 0.3s;
+      }
+
+      .content-card:hover {
+        transform: scale(1.05);
+      }
+
+      .content-card img {
+        width: 100%;
+        border-radius: 4px;
+      }
+
+      .content-card .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .content-card:hover .play-button {
+        opacity: 1;
+      }
+
+      /* Content row styles */
+      .content-row {
+        margin-bottom: 2rem;
+        padding: 0 2rem;
+      }
+
+      .row-title {
+        color: white;
+        margin-bottom: 1rem;
+      }
+
+      .row-content {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+      }
+
+      .row-content::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .row-content::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .row-content::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+
+      .profile-dropdown .user-plan {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 0.25rem;
+}
+
+.profile-dropdown .user-join-date {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Video Player Modal (for on-demand content only) -->
+    <div class="video-modal" id="videoModal" style="display: none">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <video id="videoPlayer" controls>
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-info">
+          <h2 id="videoTitle"></h2>
+          <p id="videoDescription"></p>
+        </div>
+      </div>
+    </div>
+
+    <header class="header">
+      <div style="display: flex; align-items: center">
+        <div class="logo">Playflix</div>
+        <nav class="main-nav">
+          <a href="#popular" class="active">Popular</a>
+          <a href="#trending">Trending</a>
+          <a href="#continue">Continue Watching</a>
+          <a href="#featured">Featured</a>
+        </nav>
+      </div>
+      <div style="display: flex; align-items: center; gap: 15px">
+        <button class="info-button-new" onclick="redirectToMood()">
+          🎭 Detect Mood
+        </button>
+        <div class="genre-filter">
+          <button class="genre-button" id="genreButton">
+            <i class="fas fa-filter"></i> Genres
+          </button>
+          <div class="genre-dropdown" id="genreDropdown">
+            <ul>
+              <li>
+                <a href="#" class="active" data-genre="all">All Genres</a>
+              </li>
+              <li><a href="#" data-genre="action">Action</a></li>
+              <li><a href="#" data-genre="drama">Drama</a></li>
+              <li><a href="#" data-genre="sci-fi">Sci-Fi</a></li>
+              <li><a href="#" data-genre="fantasy">Fantasy</a></li>
+              <li><a href="#" data-genre="thriller">Thriller</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="user-profile">
+          <div class="profile-icon" id="profileIcon">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="user-info">
+              <!-- <div class="user-avatar" id="userAvatar">A</div> -->
+              <div class="user-avatar" id="userAvatar"></div>
+              <div class="user-name" id="userName">Loading...</div>
+              <div class="user-email" id="userEmail">Loading...</div>
+              <div class="user-join-date" id="userJoinDate">Member since: Loading...</div>
+            </div>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="#" id="signOutButton"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-container">
+      <!-- Featured Content with Background Video -->
+      <section class="featured-content" id="featured">
+        <!-- Background video -->
+        <video autoplay muted loop playsinline>
+          <source src="videos/Li.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Overlay Info -->
+        <div class="featured-info">
+          <h1 class="featured-title">Featured Show</h1>
+          <p class="featured-description">
+            Discover the latest and most exciting content handpicked just for
+            you.
+          </p>
+          <div class="featured-buttons">
+            <button class="play-button" id="featuredPlayButton">▶ Play</button>
+            <button class="info-button">ℹ More Info</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content Rows -->
+      <section class="content-row" id="popular">
+        <h2 class="row-title">Popular on Playflix</h2>
+        <div class="row-content" id="popular-row"></div>
+      </section>
+
+      <section class="content-row" id="trending">
+        <h2 class="row-title">Trending Now</h2>
+        <div class="row-content" id="trending-row"></div>
+      </section>
+
+      <section class="content-row" id="continue">
+        <h2 class="row-title">Continue Watching</h2>
+        <div class="row-content" id="continue-row"></div>
+      </section>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const contentData = {
+          popular: [
+            {
+              id: 1,
+              title: "Lion King",
+              image: "images/Li.jpg",
+              videoUrl: "videos/Li.mp4",
+              description:
+                "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+              genres: ["sci-fi", "drama", "thriller"],
+              moods: ["happy", "neutral"]
+            },
+            {
+              id: 2,
+              title: "Stranger Things",
+              image: "images/ST.jpg",
+              videoUrl: "videos/st.mp4",
+              description:
+                "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+              genres: ["sci-fi", "drama", "thriller"],
+              moods: ["surprised", "neutral"]
+            },
+            {
+              id: 3,
+              title: "The Crown",
+              image: "images/thecrown.jpg",
+              videoUrl: "videos/thecrown.mp4",
+              description:
+                "This drama follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the 20th century.",
+              genres: ["drama"],
+              moods: ["sad", "neutral"]
+            },
+          ],
+          trending: [
+            {
+              id: 4,
+              title: "Money Heist",
+              image: "images/moneyh.jpg",
+              videoUrl: "videos/Moneyh.mp4",
+              description:
+                "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
+              genres: ["thriller", "action"],
+              moods: ["surprised", "neutral"]
+            },
+          ],
+          continue: [
+            {
+              id: 5,
+              title: "The Witcher",
+              image: "images/thewitcher.jpg",
+              videoUrl: "videos/thewitcher.mp4",
+              description:
+                "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
+              genres: ["fantasy", "action"],
+              moods: ["angry", "neutral"]
+            },
+          ],
+        };
+
+        
+
+        const videoModal = document.getElementById("videoModal");
+        const videoPlayer = document.getElementById("videoPlayer");
+        const videoTitle = document.getElementById("videoTitle");
+        const videoDescription = document.getElementById("videoDescription");
+        const closeModal = document.querySelector(".close-modal");
+        const featuredPlayButton =
+          document.getElementById("featuredPlayButton");
+        const navLinks = document.querySelectorAll(".main-nav a");
+        const profileIcon = document.getElementById("profileIcon");
+        const profileDropdown = document.getElementById("profileDropdown");
+        const genreButton = document.getElementById("genreButton");
+        const genreDropdown = document.getElementById("genreDropdown");
+        const genreLinks = document.querySelectorAll(".genre-dropdown a");
+
+        // Current filter state
+        let currentGenre = "all";
+
+        // Toggle profile dropdown
+        profileIcon.addEventListener("click", function (e) {
+          e.stopPropagation();
+          profileDropdown.classList.toggle("show");
+          genreDropdown.classList.remove("show");
+        });
+
+        // Toggle genre dropdown
+        genreButton.addEventListener("click", function (e) {
+          e.stopPropagation();
+          genreDropdown.classList.toggle("show");
+          profileDropdown.classList.remove("show");
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!e.target.closest(".user-profile")) {
+            profileDropdown.classList.remove("show");
+          }
+          if (!e.target.closest(".genre-filter")) {
+            genreDropdown.classList.remove("show");
+          }
+        });
+
+        // Handle genre selection
+        genreLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const selectedGenre = this.dataset.genre;
+
+            // Update active state
+            genreLinks.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+
+            // Filter content
+            currentGenre = selectedGenre;
+            filterContentByGenre(selectedGenre);
+
+            // Close dropdown
+            genreDropdown.classList.remove("show");
+          });
+        });
+
+        // Add this code inside your DOMContentLoaded event listener
+
+// Load user data from localStorage
+function loadUserData() {
+  const userData = JSON.parse(localStorage.getItem('playflixUser'));
+  
+  if (userData) {
+    // Update profile icon with first letter of name
+    const profileIcon = document.getElementById('profileIcon');
+    if (userData.name && userData.name.length > 0) {
+      profileIcon.textContent = userData.name.charAt(0).toUpperCase();
+      profileIcon.innerHTML = ''; // Clear any existing content
+      profileIcon.appendChild(document.createTextNode(userData.name.charAt(0).toUpperCase()));
+    }
+    
+    // Update profile dropdown
+    document.getElementById('userAvatar').textContent = userData.name.charAt(0).toUpperCase();
+    document.getElementById('userName').textContent = userData.name;
+    document.getElementById('userEmail').textContent = userData.email;
+    
+    // Format join date
+    if (userData.joinDate) {
+      const joinDate = new Date(userData.joinDate);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('userJoinDate').textContent = `Member since: ${joinDate.toLocaleDateString(undefined, options)}`;
+    }
+  } else {
+    // No user data found
+    document.getElementById('userName').textContent = 'Guest User';
+    document.getElementById('userEmail').textContent = 'Not logged in';
+    document.getElementById('userPlan').textContent = 'Plan: None';
+    document.getElementById('userJoinDate').textContent = 'Member since: Unknown';
+  }
+}
+
+// Call the function when the page loads
+loadUserData();
+
+
+
+        // Filter content by genre
+        function filterContentByGenre(genre) {
+          if (genre === "all") {
+            // Show all content
+            document.querySelectorAll(".content-card").forEach((card) => {
+              card.style.display = "block";
+            });
+            return;
+          }
+
+          // Hide cards that don't match the selected genre
+          document.querySelectorAll(".content-card").forEach((card) => {
+            const contentId = card.dataset.id;
+            let contentItem = null;
+
+            // Find the content item in our data
+            for (const category in contentData) {
+              const found = contentData[category].find(
+                (item) => item.id == contentId
+              );
+              if (found) {
+                contentItem = found;
+                break;
+              }
+            }
+
+            if (contentItem && contentItem.genres.includes(genre)) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+          const userMood = localStorage.getItem("userMood");
+          const userMoods = localStorage.getItem("userMoods");
+
+          if (userMoods) {
+            filterContentByMood(JSON.parse(userMoods));
+          } else if (userMood) {
+            filterContentByMood(userMood);
+          } else {
+            renderAllContent();
+          }
+        });
+
+        function filterContentByMood(mood) {
+          // If mood is an array (multiple moods selected)
+          if (Array.isArray(mood)) {
+            renderSection(
+              "popular-row",
+              contentData.popular.filter(
+                (item) => item.moods && mood.some((m) => item.moods.includes(m))
+              )
+            );
+            renderSection(
+              "trending-row",
+              contentData.trending.filter(
+                (item) => item.moods && mood.some((m) => item.moods.includes(m))
+              )
+            );
+            renderSection(
+              "continue-row",
+              contentData.continue.filter(
+                (item) => item.moods && mood.some((m) => item.moods.includes(m))
+              )
+            );
+          }
+          // If mood is a single string
+          else {
+            renderSection(
+              "popular-row",
+              contentData.popular.filter(
+                (item) => item.moods && item.moods.includes(mood)
+              )
+            );
+            renderSection(
+              "trending-row",
+              contentData.trending.filter(
+                (item) => item.moods && item.moods.includes(mood)
+              )
+            );
+            renderSection(
+              "continue-row",
+              contentData.continue.filter(
+                (item) => item.moods && item.moods.includes(mood)
+              )
+            );
+          }
+        }
+
+        document.getElementById('signOutButton').addEventListener('click', function(e) {
+  e.preventDefault();
+  
+  // Show loading/processing state
+  const signOutButton = e.target.closest('a');
+  const originalText = signOutButton.innerHTML;
+  signOutButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing out...';
+  
+  // Clear data and redirect
+  setTimeout(() => {
+    localStorage.removeItem('playflixUser');
+    window.location.href = 'index.html';
+  }, 800); // Slightly longer delay to show the loading state
+});
+
+        function renderAllContent() {
+          renderSection("popular-row", contentData.popular);
+          renderSection("trending-row", contentData.trending);
+          renderSection("continue-row", contentData.continue);
+        }
+
+        function renderSection(containerId, items) {
+          const container = document.getElementById(containerId);
+          container.innerHTML = "";
+
+          items.forEach((item) => {
+            const card = document.createElement("div");
+            card.className = "content-card";
+            card.innerHTML = `
+      <img src="${item.image}" alt="${item.title}">
+      <button class="play-button" onclick="openVideo('${item.videoUrl}', '${item.title}', '${item.description}')">▶</button>
+    `;
+            container.appendChild(card);
+          });
+        }
+
+        function createContentCard(item) {
+          const card = document.createElement("div");
+          card.className = "content-card";
+          card.dataset.id = item.id;
+          card.innerHTML = `
+          <img src="${item.image}" alt="${item.title}">
+          <button class="play-button" data-id="${item.id}">
+              <i class="fas fa-play"></i>
+          </button>
+        `;
+          return card;
+        }
+
+        function openVideoPlayer(contentItem) {
+          videoPlayer.src = contentItem.videoUrl;
+          videoTitle.textContent = contentItem.title;
+          videoDescription.textContent = contentItem.description;
+          videoModal.style.display = "block";
+          videoPlayer.play();
+
+          let timeout;
+          function hideControls() {
+            videoPlayer.controls = false;
+          }
+
+          videoPlayer.controls = true;
+          clearTimeout(timeout);
+          timeout = setTimeout(hideControls, 3000);
+
+          videoPlayer.addEventListener("mousemove", function () {
+            videoPlayer.controls = true;
+            clearTimeout(timeout);
+            timeout = setTimeout(hideControls, 3000);
+          });
+        }
+
+        function findContentById(id) {
+          for (const category in contentData) {
+            const found = contentData[category].find((item) => item.id == id);
+            if (found) return found;
+          }
+          return null;
+        }
+
+        // Handle navigation link clicks
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            // Remove active class from all links
+            navLinks.forEach((navLink) => navLink.classList.remove("active"));
+            // Add active class to clicked link
+            this.classList.add("active");
+
+            // Get the target section ID from href
+            const targetId = this.getAttribute("href").substring(1);
+            const targetSection = document.getElementById(targetId);
+
+            // Scroll to the target section
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+        });
+
+        closeModal.addEventListener("click", function () {
+          videoPlayer.pause();
+          videoModal.style.display = "none";
+        });
+
+        window.addEventListener("click", function (event) {
+          if (event.target === videoModal) {
+            videoPlayer.pause();
+            videoModal.style.display = "none";
+          }
+        });
+
+        featuredPlayButton.addEventListener("click", function () {
+          const featuredContent = contentData.popular[0];
+          openVideoPlayer(featuredContent);
+        });
+
+        document.addEventListener("click", function (event) {
+          if (event.target.closest(".play-button")) {
+            const button = event.target.closest(".play-button");
+            const contentId = button.dataset.id;
+            const contentItem = findContentById(contentId);
+            if (contentItem) {
+              openVideoPlayer(contentItem);
+            }
+          }
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (videoModal.style.display === "block") {
+            if (event.key === "Escape") {
+              videoPlayer.pause();
+              videoModal.style.display = "none";
+            }
+            if (event.key === " ") {
+              event.preventDefault();
+              if (videoPlayer.paused) {
+                videoPlayer.play();
+              } else {
+                videoPlayer.pause();
+              }
+            }
+          }
+        });
+
+        function populateRow(rowId, items) {
+          const row = document.getElementById(rowId);
+          row.innerHTML = ""; // Clear existing content
+          items.forEach((item) => {
+            row.appendChild(createContentCard(item));
+          });
+        }
+
+        // Initial population of content
+        populateRow("popular-row", contentData.popular);
+        populateRow("trending-row", contentData.trending);
+        populateRow("continue-row", contentData.continue);
+      });
+
+      function redirectToMood() {
+        window.location.href = "mood.html";
+      }
+    </script>
+  </body>
+</html>

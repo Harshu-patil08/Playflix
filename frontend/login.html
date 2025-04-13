@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - Playflix</title>
+        <link rel="stylesheet" href="auth.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <style>
+            /* Background image with overlay */
+            .auth-container {
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('BG.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                min-height: 100vh;
+            }
+            
+            /* Enhanced form styling */
+            .auth-form {
+                background-color: rgba(0, 0, 0, 0.85);
+                border-radius: 8px;
+                padding: 60px 68px;
+                min-width: 450px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Improved input focus effects */
+            .form-group input:focus {
+                background: #454545;
+                box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.5);
+            }
+            
+            /* Enhanced button styling */
+            .auth-btn {
+                background: linear-gradient(to right, #8000FF, #8000FF);
+                transition: all 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            
+            .auth-btn:hover {
+                background: linear-gradient(to right, #8000FF, #8000FF);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+            
+            /* Responsive adjustments */
+            /* Mobile Responsive Styles for Login Page */
+@media only screen and (max-width: 768px) {
+    /* Background adjustment */
+    .auth-container {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+        background-attachment: fixed;
+    }
+    
+    /* Navigation */
+    .auth-nav {
+        padding: 15px 5%;
+    }
+    
+    .auth-nav .logo {
+        width: 120px;
+        height: auto;
+    }
+    
+    /* Form Container */
+    .auth-form-container {
+        padding-top: 20px;
+        align-items: flex-start;
+    }
+    
+    /* Form Styling */
+    .auth-form {
+        width: 100%;
+        min-width: unset;
+        padding: 40px 5% !important;
+        margin-top: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 0;
+    }
+    
+    .auth-form h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    /* Form Elements */
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group input {
+        height: 48px;
+        padding: 16px 18px 0;
+        font-size: 15px;
+        width: 270px;
+    }
+    
+    .form-group label {
+        font-size: 15px;
+        top: 14px;
+        left: 18px;
+    }
+    
+    .form-group input:focus + label,
+    .form-group input:valid + label {
+        font-size: 10px;
+        top: 6px;
+    }
+    
+    .toggle-password {
+        right: 12px;
+    }
+    
+    /* Buttons */
+    .auth-btn {
+        padding: 14px;
+        font-size: 15px;
+        margin: 25px 0 15px;
+    }
+    
+    /* Helpers and Footer */
+    .auth-helpers {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .remember-me {
+        margin-bottom: 5px;
+    }
+    
+    .auth-footer {
+        font-size: 14px;
+        margin-top: 20px;
+    }
+    
+    .recaptcha-notice {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+}
+
+/* Extra Small Devices (phones, 480px and down) */
+@media only screen and (max-width: 480px) {
+    /* Navigation */
+    .auth-nav .logo {
+        width: 100px;
+    }
+    
+    /* Form Elements */
+    .auth-form h1 {
+        font-size: 24px;
+    }
+    
+    .form-group input {
+        height: 44px;
+        padding: 14px 16px 0;
+    }
+    
+    .form-group label {
+        font-size: 14px;
+        top: 12px;
+        left: 16px;
+    }
+    
+    /* Footer */
+    .auth-footer p {
+        font-size: 13px;
+    }
+    
+    .recaptcha-notice {
+        font-size: 11px;
+    }
+}
+
+/* Small Height Devices (landscape phones) */
+@media only screen and (max-height: 600px) {
+    .auth-form-container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .auth-form {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    .auth-form h1 {
+        margin-bottom: 15px;
+        font-size: 22px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .auth-btn {
+        margin: 15px 0 10px;
+    }
+}
+
+/* Very Small Screens (under 350px width) */
+@media only screen and (max-width: 350px) {
+    .auth-form {
+        padding: 30px 4% !important;
+    }
+    
+    .auth-form h1 {
+        font-size: 22px;
+    }
+    
+    .form-group input {
+        font-size: 14px;
+    }
+    
+    .auth-btn {
+        padding: 12px;
+    }
+}
+
+/* Input focus effects for mobile */
+@media (pointer: coarse) {
+    .form-group input:focus {
+        box-shadow: 0 0 0 3px #8000FF;
+    }
+}
+        </style>
+    </head>
+    <body>
+        <div class="auth-container">
+            <nav class="auth-nav">
+                <a href="index.html"><img src="images/logo_2.png" class="logo" width="150" height="auto"></a>
+            </nav>
+            
+            <div class="auth-form-container">
+                <form class="auth-form" id="login-form">
+                    <h1>Sign In</h1>
+                    
+                    <div class="form-group">
+                        <input type="email" id="login-email" required>
+                        <label for="login-email">Email or phone number</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" id="login-password" required>
+                        <label for="login-password">Password</label>
+                        <button type="button" class="toggle-password">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn">Sign In</button>
+                    
+                    <div class="auth-helpers">
+                        <a href="#" class="help-link">Need help?</a>
+                    </div>
+                    
+                    <div class="auth-footer">
+                        <p>New to Playflix? <a href="signup.html">Create Account</a>.</p>
+                        <p class="recaptcha-notice">
+                            This page is protected by Google reCAPTCHA to ensure you're not a bot. 
+                            <a href="#" class="learn-more">Learn more.</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="auth.js"></script>
+    </body>
+</html>
+
