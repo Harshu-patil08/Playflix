@@ -376,6 +376,7 @@
         <button class="info-button-new" onclick="redirectToMood()">
           🎭 Detect Mood
         </button>
+        <span id="currentMoodDisplay" style="color: white; margin-right: 10px;"></span>
         <div class="genre-filter">
           <button class="genre-button" id="genreButton">
             <i class="fas fa-filter"></i> Genres
@@ -424,7 +425,7 @@
       <section class="featured-content" id="featured">
         <!-- Background video -->
         <video autoplay muted loop playsinline>
-          <source src="https://drive.google.com/uc?export=download&id=1N-ZX28CQSE4qoMf4fl_8Xw9-75uDweyt" type="video/mp4" />
+          <source src="videos/LK.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -474,6 +475,16 @@
               moods: ["happy", "neutral"],
             },
             {
+              id: 7,
+              title: "Teri baaton mein aisa uljha jiya",
+              image: "images/teri.jpg",
+              videoUrl: "videos/teri.mp4",
+              description:
+                "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+              genres: ["drama", "fantasy"],
+              moods: ["happy","neutral"],
+            },
+            {
               id: 2,
               title: "Stranger Things",
               image: "images/ST.jpg",
@@ -484,13 +495,23 @@
               moods: ["surprised", "neutral"],
             },
             {
+              id: 8,
+              title: "Chava",
+              image: "images/chava.avif",
+              videoUrl: "videos/chava.mp4",
+              description:
+                "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+              genres: ["drama", "thriller","action"],
+              moods: ["surprised", "neutral"],
+            },
+            {
               id: 3,
               title: "The Crown",
               image: "images/thecrown.jpg",
               videoUrl: "videos/thecrown.mp4",
               description:
                 "This drama follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the 20th century.",
-              genres: ["drama"],
+              genres: ["drama","fantasy"],
               moods: ["sad", "neutral"],
             },
           ],
@@ -500,6 +521,26 @@
               title: "Money Heist",
               image: "images/moneyh.jpg",
               videoUrl: "videos/Moneyh.mp4",
+              description:
+                "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
+              genres: ["thriller", "action"],
+              moods: ["surprised", "neutral"],
+            },
+            {
+              id: 11,
+              title: "Natsmarat",
+              image: "images/nat.jpg",
+              videoUrl: "videos/nat.mp4",
+              description:
+                "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
+              genres: ["Drama", "action"],
+              moods: ["sad", "neutral"],
+            },
+            {
+              id: 9,
+              title: "Jurassic",
+              image: "images/jure.jpg",
+              videoUrl: "videos/jure.mp4",
               description:
                 "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
               genres: ["thriller", "action"],
@@ -516,6 +557,26 @@
                 "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
               genres: ["fantasy", "action"],
               moods: ["angry", "neutral"],
+            },
+            {
+              id: 10,
+              title: "Munjya",
+              image: "images/munjya.jpg",
+              videoUrl: "videos/munja.mp4",
+              description:
+                "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
+              genres: ["thriller", "comedy"],
+              moods: ["surprised", "neutral"],
+            },
+            {
+              id: 6,
+              title: "The Titan",
+              image: "images/titan.jpg",
+              videoUrl: "videos/Titan.mp4",
+              description:
+                "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
+              genres: ["sci-fi", "action"],
+              moods: ["sad", "neutral"],
             },
           ],
         };
@@ -581,6 +642,30 @@
         });
 
         // Add this code inside your DOMContentLoaded event listener
+        function displayCurrentMood() {
+  const moodDisplay = document.getElementById('currentMoodDisplay');
+  const userMood = localStorage.getItem('userMood');
+  
+  if (userMood) {
+    // Use backticks to enable template literal
+    moodDisplay.textContent = `Current Mood: ${userMood}`;
+    
+    // Optional: Add emoji based on mood
+    const moodEmojis = {
+      'happy': '😊',
+      'sad': '😢',
+      'angry': '😠',
+      'surprised': '😲',
+      'neutral': '😐'
+    };
+    
+    if (moodEmojis[userMood]) {
+      moodDisplay.textContent += ` ${moodEmojis[userMood]}`;
+    }
+  } else {
+    moodDisplay.textContent = 'Mood: Not detected';
+  }
+}
 
         // Load user data from localStorage
         function loadUserData() {
@@ -669,7 +754,7 @@
         window.addEventListener("DOMContentLoaded", () => {
           const userMood = localStorage.getItem("userMood");
           const userMoods = localStorage.getItem("userMoods");
-
+          displayCurrentMood();
           if (userMoods) {
             filterContentByMood(JSON.parse(userMoods));
           } else if (userMood) {

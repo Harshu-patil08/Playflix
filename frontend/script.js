@@ -2,6 +2,19 @@
 const contentDatabase = {
     popular: [
         { 
+            id: 9, 
+            title: "Bajirao Mastani", 
+            language: "hi", 
+            videoFile: "videos/BM.mp4",
+            thumbnail: "images/BM.jpg",
+            year: 2019,
+            rating: 9.1,
+            genres: ["Romance"],
+            description: "",
+            type: "Trailer",
+            duration: "1 hr 15 min"
+        },
+        { 
             id: 1, 
             title: "Venom English", 
             language: "en", 
@@ -15,6 +28,19 @@ const contentDatabase = {
             duration: "45 min"
         },
         { 
+            id: 10, 
+            title: "Zombivili", 
+            language: "ma", 
+            videoFile: "videos/Z.mp4",
+            thumbnail: "images/zombi.jpg",
+            year: 2022,
+            rating: 8.5,
+            genres: ["Horror","Comedy"],
+            description: "",
+            type: "Trailer",
+            duration: "10 min"
+        },
+        { 
             id: 2, 
             title: "Venom Hindi", 
             language: "hi", 
@@ -24,6 +50,19 @@ const contentDatabase = {
             rating: 8.2,
             genres: ["Adventure Movie"],
             description: "Still on the run, journalist Eddie Brock and his alien companion Venom dodge threats from a vigilant military leader and ruthless invading symbiotes.",
+            type: "Trailer",
+            duration: "32 min"
+        },
+        { 
+            id: 11, 
+            title: "Pushpa", 
+            language: "te", 
+            videoFile: "videos/Pushpa.mp4",
+            thumbnail: "images/Pushpa.jpg",
+            year: 2022,
+            rating: 8.2,
+            genres: ["Action","Romance"],
+            description: "",
             type: "Trailer",
             duration: "32 min"
         },
@@ -42,6 +81,19 @@ const contentDatabase = {
         }
     ],
     trending: [
+        { 
+            id: 8, 
+            title: "Raid", 
+            language: "hi", 
+            videoFile: "videos/raid.mp4",
+            thumbnail: "images/raid.jpg",
+            year: 2024,
+            rating: 9.1,
+            genres: ["Thriller"],
+            description: "",
+            type: "Trailer",
+            duration: "1 hr 15 min"
+        },
         { 
             id: 4, 
             title: "Juna Furniture", 
