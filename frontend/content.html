@@ -334,17 +334,17 @@
       }
 
       .profile-dropdown .user-plan {
-  font-size: 0.8rem;
-  color: #aaa;
-  margin-top: 0.25rem;
-}
+        font-size: 0.8rem;
+        color: #aaa;
+        margin-top: 0.25rem;
+      }
 
-.profile-dropdown .user-join-date {
-  font-size: 0.7rem;
-  color: #666;
-  margin-top: 0.25rem;
-  font-style: italic;
-}
+      .profile-dropdown .user-join-date {
+        font-size: 0.7rem;
+        color: #666;
+        margin-top: 0.25rem;
+        font-style: italic;
+      }
     </style>
   </head>
   <body>
@@ -403,11 +403,15 @@
               <div class="user-avatar" id="userAvatar"></div>
               <div class="user-name" id="userName">Loading...</div>
               <div class="user-email" id="userEmail">Loading...</div>
-              <div class="user-join-date" id="userJoinDate">Member since: Loading...</div>
+              <div class="user-join-date" id="userJoinDate">
+                Member since: Loading...
+              </div>
             </div>
             <ul class="dropdown-menu">
               <li>
-                <a href="#" id="signOutButton"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                <a href="#" id="signOutButton"
+                  ><i class="fas fa-sign-out-alt"></i> Sign Out</a
+                >
               </li>
             </ul>
           </div>
@@ -420,7 +424,7 @@
       <section class="featured-content" id="featured">
         <!-- Background video -->
         <video autoplay muted loop playsinline>
-          <source src="videos/Li.mp4" type="video/mp4" />
+          <source src="https://drive.google.com/uc?export=download&id=1N-ZX28CQSE4qoMf4fl_8Xw9-75uDweyt" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
@@ -467,7 +471,7 @@
               description:
                 "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
               genres: ["sci-fi", "drama", "thriller"],
-              moods: ["happy", "neutral"]
+              moods: ["happy", "neutral"],
             },
             {
               id: 2,
@@ -477,7 +481,7 @@
               description:
                 "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
               genres: ["sci-fi", "drama", "thriller"],
-              moods: ["surprised", "neutral"]
+              moods: ["surprised", "neutral"],
             },
             {
               id: 3,
@@ -487,7 +491,7 @@
               description:
                 "This drama follows the political rivalries and romance of Queen Elizabeth II's reign and the events that shaped the second half of the 20th century.",
               genres: ["drama"],
-              moods: ["sad", "neutral"]
+              moods: ["sad", "neutral"],
             },
           ],
           trending: [
@@ -499,7 +503,7 @@
               description:
                 "An unusual group of robbers attempt to carry out the most perfect robbery in Spanish history - stealing 2.4 billion euros from the Royal Mint of Spain.",
               genres: ["thriller", "action"],
-              moods: ["surprised", "neutral"]
+              moods: ["surprised", "neutral"],
             },
           ],
           continue: [
@@ -511,12 +515,10 @@
               description:
                 "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
               genres: ["fantasy", "action"],
-              moods: ["angry", "neutral"]
+              moods: ["angry", "neutral"],
             },
           ],
         };
-
-        
 
         const videoModal = document.getElementById("videoModal");
         const videoPlayer = document.getElementById("videoPlayer");
@@ -580,43 +582,55 @@
 
         // Add this code inside your DOMContentLoaded event listener
 
-// Load user data from localStorage
-function loadUserData() {
-  const userData = JSON.parse(localStorage.getItem('playflixUser'));
-  
-  if (userData) {
-    // Update profile icon with first letter of name
-    const profileIcon = document.getElementById('profileIcon');
-    if (userData.name && userData.name.length > 0) {
-      profileIcon.textContent = userData.name.charAt(0).toUpperCase();
-      profileIcon.innerHTML = ''; // Clear any existing content
-      profileIcon.appendChild(document.createTextNode(userData.name.charAt(0).toUpperCase()));
-    }
-    
-    // Update profile dropdown
-    document.getElementById('userAvatar').textContent = userData.name.charAt(0).toUpperCase();
-    document.getElementById('userName').textContent = userData.name;
-    document.getElementById('userEmail').textContent = userData.email;
-    
-    // Format join date
-    if (userData.joinDate) {
-      const joinDate = new Date(userData.joinDate);
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      document.getElementById('userJoinDate').textContent = `Member since: ${joinDate.toLocaleDateString(undefined, options)}`;
-    }
-  } else {
-    // No user data found
-    document.getElementById('userName').textContent = 'Guest User';
-    document.getElementById('userEmail').textContent = 'Not logged in';
-    document.getElementById('userPlan').textContent = 'Plan: None';
-    document.getElementById('userJoinDate').textContent = 'Member since: Unknown';
-  }
-}
+        // Load user data from localStorage
+        function loadUserData() {
+          const userData = JSON.parse(localStorage.getItem("playflixUser"));
 
-// Call the function when the page loads
-loadUserData();
+          if (userData) {
+            // Update profile icon with first letter of name
+            const profileIcon = document.getElementById("profileIcon");
+            if (userData.name && userData.name.length > 0) {
+              profileIcon.textContent = userData.name.charAt(0).toUpperCase();
+              profileIcon.innerHTML = ""; // Clear any existing content
+              profileIcon.appendChild(
+                document.createTextNode(userData.name.charAt(0).toUpperCase())
+              );
+            }
 
+            // Update profile dropdown
+            document.getElementById("userAvatar").textContent = userData.name
+              .charAt(0)
+              .toUpperCase();
+            document.getElementById("userName").textContent = userData.name;
+            document.getElementById("userEmail").textContent = userData.email;
 
+            // Format join date
+            if (userData.joinDate) {
+              const joinDate = new Date(userData.joinDate);
+              const options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              };
+              document.getElementById(
+                "userJoinDate"
+              ).textContent = `Member since: ${joinDate.toLocaleDateString(
+                undefined,
+                options
+              )}`;
+            }
+          } else {
+            // No user data found
+            document.getElementById("userName").textContent = "Guest User";
+            document.getElementById("userEmail").textContent = "Not logged in";
+            document.getElementById("userPlan").textContent = "Plan: None";
+            document.getElementById("userJoinDate").textContent =
+              "Member since: Unknown";
+          }
+        }
+
+        // Call the function when the page loads
+        loadUserData();
 
         // Filter content by genre
         function filterContentByGenre(genre) {
@@ -710,20 +724,23 @@ loadUserData();
           }
         }
 
-        document.getElementById('signOutButton').addEventListener('click', function(e) {
-  e.preventDefault();
-  
-  // Show loading/processing state
-  const signOutButton = e.target.closest('a');
-  const originalText = signOutButton.innerHTML;
-  signOutButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing out...';
-  
-  // Clear data and redirect
-  setTimeout(() => {
-    localStorage.removeItem('playflixUser');
-    window.location.href = 'index.html';
-  }, 800); // Slightly longer delay to show the loading state
-});
+        document
+          .getElementById("signOutButton")
+          .addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Show loading/processing state
+            const signOutButton = e.target.closest("a");
+            const originalText = signOutButton.innerHTML;
+            signOutButton.innerHTML =
+              '<i class="fas fa-spinner fa-spin"></i> Signing out...';
+
+            // Clear data and redirect
+            setTimeout(() => {
+              localStorage.removeItem("playflixUser");
+              window.location.href = "index.html";
+            }, 800); // Slightly longer delay to show the loading state
+          });
 
         function renderAllContent() {
           renderSection("popular-row", contentData.popular);
@@ -738,11 +755,18 @@ loadUserData();
           items.forEach((item) => {
             const card = document.createElement("div");
             card.className = "content-card";
+            card.dataset.id = item.id; // Add this line
             card.innerHTML = `
       <img src="${item.image}" alt="${item.title}">
-      <button class="play-button" onclick="openVideo('${item.videoUrl}', '${item.title}', '${item.description}')">▶</button>
+      <button class="play-button">▶</button>
     `;
             container.appendChild(card);
+
+            // Add click handler to the play button
+            const playButton = card.querySelector(".play-button");
+            playButton.addEventListener("click", () => {
+              openVideoPlayer(item); // Use the correct function name
+            });
           });
         }
 
@@ -760,26 +784,30 @@ loadUserData();
         }
 
         function openVideoPlayer(contentItem) {
+          // Ensure elements exist
+          if (!videoModal || !videoPlayer || !videoTitle || !videoDescription) {
+            console.error("Video modal elements not found");
+            return;
+          }
+
+          // Set video source and info
           videoPlayer.src = contentItem.videoUrl;
           videoTitle.textContent = contentItem.title;
           videoDescription.textContent = contentItem.description;
+
+          // Show modal
           videoModal.style.display = "block";
-          videoPlayer.play();
 
-          let timeout;
-          function hideControls() {
-            videoPlayer.controls = false;
+          // Attempt to play (may need user interaction on some browsers)
+          const playPromise = videoPlayer.play();
+
+          if (playPromise !== undefined) {
+            playPromise.catch((error) => {
+              console.log("Auto-play prevented:", error);
+              // Show play button instead
+              videoPlayer.controls = true;
+            });
           }
-
-          videoPlayer.controls = true;
-          clearTimeout(timeout);
-          timeout = setTimeout(hideControls, 3000);
-
-          videoPlayer.addEventListener("mousemove", function () {
-            videoPlayer.controls = true;
-            clearTimeout(timeout);
-            timeout = setTimeout(hideControls, 3000);
-          });
         }
 
         function findContentById(id) {
