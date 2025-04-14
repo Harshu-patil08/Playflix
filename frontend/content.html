@@ -345,23 +345,225 @@
         margin-top: 0.25rem;
         font-style: italic;
       }
+
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #141414;
+            color: #fff;
+            padding-top: 60px;
+        }
+        
+        /* Mobile Navigation Bar - Hidden on desktop */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #141414;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+        
+        .mobile-logo {
+            color: #8000FF;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Sidebar Navigation - Hidden on desktop */
+        .sidebar-overlay {
+            display: none;
+        }
+        
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: #141414;
+            z-index: 1001;
+            transition: left 0.3s ease;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        
+        .sidebar.active {
+            left: 0;
+        }
+        
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-nav a {
+            color: #e5e5e5;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border-bottom: 1px solid #333;
+            transition: background-color 0.3s;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: #8000FF;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Content Categories - Hidden on desktop */
+        .content-categories {
+            display: none;
+        }
+        
+        .category-btn {
+            padding: 8px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        
+        .category-btn.active {
+            background-color: #8000FF;
+        }
+        
+        /* Media Query for Mobile Devices */
+        @media only screen and (max-width: 768px) {
+            /* Hide desktop header on mobile */
+            .header {
+                display: none;
+            }
+            
+            /* Show mobile navigation */
+            .mobile-nav {
+                display: flex;
+            }
+            
+            /* Show sidebar when active */
+            .sidebar, .sidebar-overlay {
+                display: block;
+            }
+            
+            /* Show content categories */
+            .content-categories {
+                display: flex;
+                overflow-x: auto;
+                padding: 15px;
+                gap: 10px;
+                background-color: #141414;
+                position: sticky;
+                top: 60px;
+                z-index: 999;
+                scrollbar-width: none;
+            }
+            
+            .content-categories::-webkit-scrollbar {
+                display: none;
+            }
+            
+            /* Adjust main content */
+            .content-container {
+                margin-top: 0;
+                padding-top: 60px;
+            }
+            
+            /* Adjust featured content height */
+            .featured-content {
+                height: 50vh;
+            }
+            
+            .featured-info {
+                max-width: 90%;
+                bottom: 5%;
+            }
+            
+            /* Adjust content rows */
+            .content-row {
+                padding: 0 15px;
+            }
+            
+            .row-title {
+                font-size: 1.2rem;
+            }
+        }
     </style>
   </head>
   <body>
-    <!-- Video Player Modal (for on-demand content only) -->
-    <div class="video-modal" id="videoModal" style="display: none">
-      <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <video id="videoPlayer" controls>
-          Your browser does not support the video tag.
-        </video>
-        <div class="video-info">
-          <h2 id="videoTitle"></h2>
-          <p id="videoDescription"></p>
-        </div>
-      </div>
+    <!-- Mobile Navigation Bar - Only visible on mobile -->
+    <nav class="mobile-nav">
+      <div class="mobile-logo">StreamFlix</div>
+      <button class="menu-btn">☰</button>
+    </nav>
+  
+    <!-- Sidebar Navigation - Only visible on mobile -->
+    <div class="sidebar-overlay"></div>
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <a href="#popular">Popular</a>
+            <a href="#trending">Trending</a>
+            <a href="#continue">Continue Watching</a>
+            <a href="#featured">Featured</a>
+            <a href="#" onclick="redirectToMood()">Mood Detect</a>
+            <a href="#" onclick="displayCurrentMood()">Current Mood</a>
+            <a href="#" class="genre-mobile-link">Genres</a>
+            <a href="#">My List</a>
+            <a href="#">Account</a>
+            <a href="#">Settings</a>
+        </nav>
+    </aside>
+  
+    <!-- Content Categories - Only visible on mobile -->
+    <div class="content-categories">
+        <button class="category-btn active" data-target="popular">Popular</button>
+        <button class="category-btn" data-target="trending">Trending</button>
+        <button class="category-btn" data-target="continue">Continue Watching</button>
+        <button class="category-btn" data-target="featured">Featured</button>
+        <button class="category-btn" onclick="redirectToMood()">Mood Detect</button>
     </div>
 
+    <!-- Desktop Header - Hidden on mobile -->
     <header class="header">
       <div style="display: flex; align-items: center">
         <div class="logo">Playflix</div>
@@ -400,7 +602,6 @@
           </div>
           <div class="profile-dropdown" id="profileDropdown">
             <div class="user-info">
-              <!-- <div class="user-avatar" id="userAvatar">A</div> -->
               <div class="user-avatar" id="userAvatar"></div>
               <div class="user-name" id="userName">Loading...</div>
               <div class="user-email" id="userEmail">Loading...</div>
@@ -459,6 +660,20 @@
         <div class="row-content" id="continue-row"></div>
       </section>
     </main>
+
+    <!-- Video Player Modal (for on-demand content only) -->
+    <div class="video-modal" id="videoModal" style="display: none">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <video id="videoPlayer" controls>
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-info">
+          <h2 id="videoTitle"></h2>
+          <p id="videoDescription"></p>
+        </div>
+      </div>
+    </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -581,13 +796,21 @@
           ],
         };
 
+        // Mobile elements
+        const menuBtn = document.querySelector('.menu-btn');
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        const genreMobileLink = document.querySelector('.genre-mobile-link');
+        
+        // Desktop elements
         const videoModal = document.getElementById("videoModal");
         const videoPlayer = document.getElementById("videoPlayer");
         const videoTitle = document.getElementById("videoTitle");
         const videoDescription = document.getElementById("videoDescription");
         const closeModal = document.querySelector(".close-modal");
-        const featuredPlayButton =
-          document.getElementById("featuredPlayButton");
+        const featuredPlayButton = document.getElementById("featuredPlayButton");
         const navLinks = document.querySelectorAll(".main-nav a");
         const profileIcon = document.getElementById("profileIcon");
         const profileDropdown = document.getElementById("profileDropdown");
@@ -597,6 +820,72 @@
 
         // Current filter state
         let currentGenre = "all";
+
+        // Mobile sidebar functionality
+        menuBtn.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Handle sidebar navigation clicks
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // For links that don't have specific onclick handlers
+                if (!link.hasAttribute('onclick')) {
+                    e.preventDefault();
+                    
+                    // Close sidebar
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    const target = link.textContent.trim();
+                    handleSidebarNavigation(target);
+                }
+            });
+        });
+
+        // Handle category buttons on mobile
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const target = btn.dataset.target;
+                if (target) {
+                    // Scroll to the section
+                    const section = document.getElementById(target);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Handle genre link in mobile sidebar
+        genreMobileLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Close sidebar
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Open genre dropdown if on desktop, or show genres section on mobile
+            if (window.innerWidth > 768) {
+                genreDropdown.classList.add('show');
+            } else {
+                // For mobile, you might want to show a genre filter interface
+                alert("Genre filter would appear here on mobile");
+            }
+        });
 
         // Toggle profile dropdown
         profileIcon.addEventListener("click", function (e) {
@@ -641,31 +930,29 @@
           });
         });
 
-        // Add this code inside your DOMContentLoaded event listener
         function displayCurrentMood() {
-  const moodDisplay = document.getElementById('currentMoodDisplay');
-  const userMood = localStorage.getItem('userMood');
-  
-  if (userMood) {
-    // Use backticks to enable template literal
-    moodDisplay.textContent = `Current Mood: ${userMood}`;
-    
-    // Optional: Add emoji based on mood
-    const moodEmojis = {
-      'happy': '😊',
-      'sad': '😢',
-      'angry': '😠',
-      'surprised': '😲',
-      'neutral': '😐'
-    };
-    
-    if (moodEmojis[userMood]) {
-      moodDisplay.textContent += ` ${moodEmojis[userMood]}`;
-    }
-  } else {
-    moodDisplay.textContent = 'Mood: Not detected';
-  }
-}
+          const moodDisplay = document.getElementById('currentMoodDisplay');
+          const userMood = localStorage.getItem('userMood');
+          
+          if (userMood) {
+            moodDisplay.textContent = `Current Mood: ${userMood}`;
+            
+            // Optional: Add emoji based on mood
+            const moodEmojis = {
+              'happy': '😊',
+              'sad': '😢',
+              'angry': '😠',
+              'surprised': '😲',
+              'neutral': '😐'
+            };
+            
+            if (moodEmojis[userMood]) {
+              moodDisplay.textContent += ` ${moodEmojis[userMood]}`;
+            }
+          } else {
+            moodDisplay.textContent = 'Mood: Not detected';
+          }
+        }
 
         // Load user data from localStorage
         function loadUserData() {
@@ -708,7 +995,6 @@
             // No user data found
             document.getElementById("userName").textContent = "Guest User";
             document.getElementById("userEmail").textContent = "Not logged in";
-            document.getElementById("userPlan").textContent = "Plan: None";
             document.getElementById("userJoinDate").textContent =
               "Member since: Unknown";
           }
@@ -840,17 +1126,17 @@
           items.forEach((item) => {
             const card = document.createElement("div");
             card.className = "content-card";
-            card.dataset.id = item.id; // Add this line
+            card.dataset.id = item.id;
             card.innerHTML = `
-      <img src="${item.image}" alt="${item.title}">
-      <button class="play-button">▶</button>
-    `;
+              <img src="${item.image}" alt="${item.title}">
+              <button class="play-button">▶</button>
+            `;
             container.appendChild(card);
 
             // Add click handler to the play button
             const playButton = card.querySelector(".play-button");
             playButton.addEventListener("click", () => {
-              openVideoPlayer(item); // Use the correct function name
+              openVideoPlayer(item);
             });
           });
         }
@@ -860,11 +1146,11 @@
           card.className = "content-card";
           card.dataset.id = item.id;
           card.innerHTML = `
-          <img src="${item.image}" alt="${item.title}">
-          <button class="play-button" data-id="${item.id}">
-              <i class="fas fa-play"></i>
-          </button>
-        `;
+            <img src="${item.image}" alt="${item.title}">
+            <button class="play-button" data-id="${item.id}">
+                <i class="fas fa-play"></i>
+            </button>
+          `;
           return card;
         }
 
@@ -984,6 +1270,30 @@
 
       function redirectToMood() {
         window.location.href = "mood.html";
+      }
+      
+      function handleSidebarNavigation(target) {
+        const sectionTitles = {
+            'Popular': 'Popular Content',
+            'Trending': 'Trending Now',
+            'Continue Watching': 'Continue Watching',
+            'Featured': 'Featured Content',
+            'My List': 'My List',
+            'Account': 'Account',
+            'Settings': 'Settings'
+        };
+        
+        if (sectionTitles[target]) {
+            // Here you would load the appropriate content based on the selection
+            console.log(`Loading ${target} content...`);
+            
+            // Scroll to the relevant section if it exists
+            const sectionId = target.toLowerCase().replace(' ', '-');
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
       }
     </script>
   </body>
