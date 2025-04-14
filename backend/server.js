@@ -27,6 +27,10 @@ const SignupSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", SignupSchema);
 
+app.get("/", (req, res) => {
+  res.send("🚀 Backend is live and running!");
+});
+
 // 👇 Signup route
 app.post("/signup", async (req, res) => {
   try {
@@ -56,4 +60,4 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("🚀 Server running on http://localhost:3000"));
+app.listen(3000, () => console.log("🚀 Server running"));

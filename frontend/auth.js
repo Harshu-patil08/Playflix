@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return 'http://localhost:3000';
     }
     // In production (your hosted site)
-    return 'https://your-backend-api-url.com'; // Replace with your actual backend URL
+    return 'https://playflix-backend.onrender.com'; // Replace with your actual backend URL
   }
 
 
