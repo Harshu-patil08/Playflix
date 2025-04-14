@@ -161,7 +161,7 @@ async function handleSignup(event) {
     };
   
     try {
-      const res = await fetch(`${getApiBaseUrl()}/signup`, {
+      const res = await fetch(`https://playflix-6id4.onrender.com/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
