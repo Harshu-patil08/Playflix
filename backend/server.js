@@ -34,11 +34,22 @@ app.get("/", (req, res) => {
 // 👇 Signup route
 app.post("/signup", async (req, res) => {
   try {
+    const { email } = req.body;
+    
+    // Check if email already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already exists" });
+    }
+
     const newUser = new User(req.body);
     await newUser.save();
-    res.status(201).json({ message: "User registered", user: newUser });
+    res.status(201).json({ message: "User registered successfully", user: newUser });
   } catch (err) {
     console.error(err);
+    if (err.name === 'ValidationError') {
+      return res.status(400).json({ message: err.message });
+    }
     res.status(500).json({ message: "Error saving user" });
   }
 });
