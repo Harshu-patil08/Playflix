@@ -161,7 +161,7 @@ async function handleSignup(event) {
     };
   
     try {
-      const res = await fetch("http://localhost:3000/signup", {
+      const res = await fetch(`${getApiBaseUrl()}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
