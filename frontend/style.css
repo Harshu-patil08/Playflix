@@ -812,3 +812,223 @@ nav button:hover {
         padding: 10px;
     }
 }
+/* Mobile-First CSS (max-width: 480px) */
+@media only screen and (max-width: 480px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    /* Header Section */
+    .header {
+        height: auto;
+        min-height: 100vh;
+        padding: 15px 4%;
+        background-position: top center;
+    }
+
+    nav {
+        padding: 8px 0;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .language-btn, .signin-btn {
+        padding: 6px 10px;
+        font-size: 10px;
+    }
+
+    .language-btn img {
+        width: 8px;
+        margin-left: 5px;
+    }
+
+    /* Header Content */
+    .header-content {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 40px auto 20px;
+        padding: 0 4%;
+        width: 100%;
+    }
+
+    .header-content h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .header-content h3 {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .email-signup {
+        flex-direction: column;
+        background: transparent;
+        max-width: 100%;
+        margin: 20px auto;
+    }
+
+    .email-signup input {
+        margin-left: 0;
+        margin-bottom: 10px;
+        padding: 12px;
+        border-radius: 4px;
+    }
+
+    .email-signup button {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Join Reasons */
+    .join-reasons-container {
+        position: relative;
+        top: auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 20px 4%;
+        margin-top: 30px;
+    }
+
+    .join-reason-box {
+        flex: 1 1 100%;
+        padding: 15px;
+        min-height: auto;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .join-reason-box span {
+        font-size: 24px;
+        margin-bottom: 8px;
+        order: -1;
+    }
+
+    .join-reason-box p {
+        font-size: 13px;
+    }
+
+    /* Content Sections */
+    .content-container {
+        padding: 30px 4% 50px;
+    }
+
+    .content-section {
+        padding: 20px 0;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        padding: 0 4%;
+    }
+
+    .content-row {
+        padding: 0 4% 15px;
+    }
+
+    .content-item {
+        min-width: 110px;
+        height: 65px;
+    }
+
+    .content-info h3 {
+        font-size: 11px;
+    }
+
+    .content-info p {
+        font-size: 9px;
+    }
+
+    /* Modal */
+    .modal-content {
+        margin: 10% auto;
+        padding: 20px;
+        width: 95%;
+    }
+
+    .modal-poster {
+        max-height: 180px;
+    }
+
+    .modal-title {
+        font-size: 1.3rem;
+    }
+
+    .modal-meta {
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 12px;
+    }
+
+    .modal-description {
+        font-size: 13px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-play-btn, 
+    .modal-add-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+    }
+
+    /* Language Dropdown */
+    .language-dropdown-content {
+        min-width: 120px;
+    }
+
+    .language-dropdown-content div {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Extra Small Devices (360px and below) */
+@media only screen and (max-width: 360px) {
+    .header-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-content h3 {
+        font-size: 0.9rem;
+    }
+
+    .email-signup input, 
+    .email-signup button {
+        padding: 10px;
+    }
+
+    .content-item {
+        min-width: 95px;
+        height: 55px;
+    }
+
+    .join-reason-box {
+        padding: 12px;
+    }
+
+    .join-reason-box p {
+        font-size: 12px;
+    }
+}
